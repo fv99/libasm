@@ -42,7 +42,7 @@ RESET       = $(shell printf "\033[0m")
 # Rule: link object files -> final binary
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)Linking objects...$(RESET)"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@ld -o $(NAME) $(OBJS)
 	@echo "$(GREEN)Compilation successful.$(RESET)"
 
 all: $(NAME)

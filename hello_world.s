@@ -1,16 +1,18 @@
-section .data
-    msg db "Hello world!", 10
+global _start
 
 section .text
-    global _main
 
-_main:
-    mov rax, 0x2000004      ; write
-    mov rdi, 1              ; fd = stdout
-    mov rsi, msg            ; buffer
-    mov rdx, 13             ; length
-    syscall
+_start:
+  mov rax, 1        ; write(
+  mov rdi, 1        ;   STDOUT_FILENO,
+  mov rsi, msg      ;   "Hello, world!\n",
+  mov rdx, msglen   ;   sizeof("Hello, world!\n")
+  syscall           ; );
 
-    mov rax, 0x2000001      ; exit
-    xor rdi, rdi
-    syscall
+  mov rax, 60       ; exit(
+  mov rdi, 0        ;   EXIT_SUCCESS
+  syscall           ; );
+
+section .rodata
+  msg: db "Hello, world!", 10
+  msglen: equ $ - msg

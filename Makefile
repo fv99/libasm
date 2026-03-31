@@ -50,7 +50,7 @@ all: $(NAME)
 # compile and link test binary
 test: $(NAME)
 	@echo "$(YELLOW)Compiling tests...$(RESET)"
-	@$(CC) $(CFLAGS) main.c -L. -lasm -o test_libasm
+	@$(CC) $(CFLAGS) test.c -L. -lasm -o test_libasm
 	@echo "$(GREEN)Run with: ./test_libasm$(RESET)"
 
 clean:

@@ -13,8 +13,8 @@
 
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror
-NAME        = libasm
-SRCS        = hello_world.s
+NAME        = libasm.a
+SRCS        = ft_strlen.s
 OBJS        = $(SRCS:.s=.o)
 NASM        = nasm
 NASMFLAGS   = -f
@@ -34,18 +34,24 @@ GREEN       = $(shell printf "\033[0;32m")
 YELLOW      = $(shell printf "\033[0;33m")
 RESET       = $(shell printf "\033[0m")
 
-# Rule: assemble .s -> .o
+# assemble .s -> .o
 %.o: %.s
 	@echo "$(YELLOW)Assembling: $(GREEN)$<$(RESET)"
 	@$(NASM) $(NASMFLAGS) $< -o $@
 
-# Rule: link object files -> final binary
+# link object files -> final binary
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)Linking objects...$(RESET)"
-	@ld -o $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 	@echo "$(GREEN)Compilation successful.$(RESET)"
 
 all: $(NAME)
+
+# compile and link test binary
+test: $(NAME)
+	@echo "$(YELLOW)Compiling tests...$(RESET)"
+	@$(CC) $(CFLAGS) main.c -L. -lasm -o test_libasm
+	@echo "$(GREEN)Run with: ./test_libasm$(RESET)"
 
 clean:
 	@echo "$(YELLOW)Removing object files...$(RESET)"
@@ -53,7 +59,7 @@ clean:
 
 fclean: clean
 	@echo "$(YELLOW)Removing executable...$(RESET)"
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) test_libasm
 
 re: fclean all
 

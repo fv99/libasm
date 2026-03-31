@@ -6,7 +6,7 @@ _start:
   mov rax, 1        ; syscall 1 = write
   mov rdi, 1        ; first arg - file descriptor 1 - STDOUT,
   mov rsi, msg      ; second arg - pointer to our string msg
-  mov rdx, msglen   ; 14 bytes - len of "Hello, world!\n"
+  mov rdx, msglen   ; return value 14 - len of "Hello, world!\n"
   syscall           ; write 14 bytes to stdout
 
   mov rax, 60       ; syscall 60 = exit

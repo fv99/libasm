@@ -10,6 +10,7 @@ char *ft_strcpy(char *dest, const char *src);
 int ft_strcmp(const char *s1, const char *s2);
 ssize_t ft_write(int fd, const void *buf, size_t count);
 ssize_t ft_read(int fd, void *buf, size_t count);
+char *ft_strdup(const char *s);
 
 void test_strlen()
 {
@@ -104,6 +105,34 @@ void test_read(void)
     printf("bad fd returned: %zd, errno: %d (%s)\n", ret, errno, strerror(errno));
 }
 
+void test_strdup(void)
+{
+    char *s1;
+    char *s2;
+
+    printf("\n=== strdup ===\n");
+    s1 = strdup("hello");
+    printf("strdup: %s\n", s1);
+    free(s1);
+    s1 = strdup("");
+    printf("strdup: %s\n", s1);
+    free(s1);
+    s1 = strdup("hello world!");
+    printf("strdup: %s\n", s1);
+    free(s1);
+
+    printf("\n=== ft_strdup ===\n");
+    s2 = ft_strdup("hello");
+    printf("ft_strdup: %s\n", s2);
+    free(s2);
+    s2 = ft_strdup("");
+    printf("ft_strdup: %s\n", s2);
+    free(s2);
+    s2 = ft_strdup("hello world!");
+    printf("ft_strdup: %s\n", s2);
+    free(s2);
+}
+
 int main(void)
 {
     test_strlen();
@@ -111,6 +140,7 @@ int main(void)
     test_strcmp();
     test_write();
     test_read();
+    test_strdup();
 
     return 0;
 }

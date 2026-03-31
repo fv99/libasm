@@ -3,6 +3,7 @@
 
 **Useful links**
 ```
+https://cdrdv2.intel.com/v1/dl/getContent/671200
 https://www.felixcloutier.com/x86/
 https://linux-kernel-labs.github.io/refs/heads/master/lectures/syscalls.html
 https://www.chromium.org/chromium-os/developer-library/reference/linux-constants/syscalls/

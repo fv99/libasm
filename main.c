@@ -85,24 +85,23 @@ void test_read(void)
     int fd;
 
     printf("\n=== read ===\n");
-    ret = read(-1, buf1, 5);
-    printf("bad fd returned: %zd\n", ret);
 
     fd = open("test.txt", O_RDONLY);
     memset(buf1, 0, 50);
     ret = read(fd, buf1, 12);
     printf("read returned: %zd, buf: %s\n", ret, buf1);
     close(fd);
+    ret = read(-1, buf1, 5);
+    printf("bad fd returned: %zd, errno: %d (%s)\n", ret, errno, strerror(errno));
 
     printf("\n=== ft_read ===\n");
-    ret = ft_read(-1, buf2, 5);
-    printf("bad fd returned: %zd\n", ret);
-
     fd = open("test.txt", O_RDONLY);
     memset(buf2, 0, 50);
     ret = ft_read(fd, buf2, 12);
     printf("read returned: %zd, buf: %s\n", ret, buf2);
     close(fd);
+    ret = ft_read(-1, buf2, 5);
+    printf("bad fd returned: %zd, errno: %d (%s)\n", ret, errno, strerror(errno));
 }
 
 int main(void)

@@ -14,7 +14,7 @@
 CC          = gcc
 CFLAGS      = -Wall -Wextra -Werror
 NAME        = libasm.a
-SRCS        = ft_strlen.s ft_strcpy.s ft_strcmp.s
+SRCS        = ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s
 OBJS        = $(SRCS:.s=.o)
 NASM        = nasm
 NASMFLAGS   = -f

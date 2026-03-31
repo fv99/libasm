@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 size_t ft_strlen(const char *s);
 char *ft_strcpy(char *dest, const char *src);
 int ft_strcmp(const char *s1, const char *s2);
+ssize_t ft_write(int fd, const void *buf, size_t count);
 
 void test_strlen()
 {
@@ -51,10 +53,33 @@ void test_strcmp(void)
     printf("%d\n", ft_strcmp("a", "")); // positiv
 }
 
+void test_write(void)
+{
+    ssize_t ret;
+
+    printf("\n=== write ===\n");
+    ret = write(1, "hello\n", 6);
+    printf("returned: %zd\n", ret);
+    ret = write(1, "", 0);
+    printf("returned: %zd\n", ret);
+    ret = write(-1, "bad fd\n", 7);
+    printf("returned: %zd\n", ret);
+
+    printf("\n=== ft_write ===\n");
+    ret = ft_write(1, "hello\n", 6);
+    printf("returned: %zd\n", ret);
+    ret = ft_write(1, "", 0);
+    printf("returned: %zd\n", ret);
+    ret = ft_write(-1, "bad fd\n", 7);
+    printf("returned: %zd\n", ret);
+}
+
 int main(void)
 {
     test_strlen();
     test_strcpy();
     test_strcmp();
+    test_write();
+
     return 0;
 }

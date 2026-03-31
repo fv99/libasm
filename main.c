@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <errno.h>
 
 size_t ft_strlen(const char *s);
 char *ft_strcpy(char *dest, const char *src);
@@ -65,7 +66,7 @@ void test_write(void)
     ret = write(1, "", 0);
     printf("returned: %zd\n", ret);
     ret = write(-1, "bad fd\n", 7);
-    printf("returned: %zd\n", ret);
+    printf("returned: %zd, errno: %d (%s)\n", ret, errno, strerror(errno));
 
     printf("\n=== ft_write ===\n");
     ret = ft_write(1, "hello\n", 6);
@@ -73,7 +74,7 @@ void test_write(void)
     ret = ft_write(1, "", 0);
     printf("returned: %zd\n", ret);
     ret = ft_write(-1, "bad fd\n", 7);
-    printf("returned: %zd\n", ret);
+    printf("returned: %zd, errno: %d (%s)\n", ret, errno, strerror(errno));
 }
 
 void test_read(void)
@@ -86,7 +87,7 @@ void test_read(void)
     printf("\n=== read ===\n");
     ret = read(-1, buf1, 5);
     printf("bad fd returned: %zd\n", ret);
-    
+
     fd = open("test.txt", O_RDONLY);
     memset(buf1, 0, 50);
     ret = read(fd, buf1, 12);
